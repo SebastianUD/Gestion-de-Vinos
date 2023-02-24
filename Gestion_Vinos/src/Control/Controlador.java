@@ -34,6 +34,7 @@ public class Controlador implements ActionListener {
         this.vista.setTitle("Gestión de vinos");
         //Se le indica la posicion --> null para que la ventana inicie en la posicion 0 es decir en el centro de la pantalla
         this.vista.setLocationRelativeTo(null);
+        vista.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
