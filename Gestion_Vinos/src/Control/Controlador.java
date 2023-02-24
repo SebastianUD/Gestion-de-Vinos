@@ -16,7 +16,7 @@ public class Controlador implements ActionListener {
     private Interfaz vista;
     private Vino modelo;
     ArrayList<Vino> lista = new ArrayList<Vino>();
-    private int posicion = -1;
+    private int posicion = 0;
 
     //Constructor para inicializar la vista
     public Controlador(Vino modelo, Interfaz vista) {
@@ -39,22 +39,36 @@ public class Controlador implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this.vista.btnInsertar) {
+            if (this.vista.insertId.getText().equals("") && this.vista.insertMarca.getText().equals("") && this.vista.insertColor.getSelectedItem().equals("None") && this.vista.insertEdad.getSelectedItem().equals("None")){
+                this.vista.msgInsertar("");
+            } else{
+                boolean comprobar;
+                //Llama al método crear vino, enviando como parámetros lo que se llene en los JTextField, crea el vino y retorna un booleano
+                comprobar = crearVino(this.vista.insertId.getText(), this.vista.insertMarca.getText(), this.vista.insertColor.getSelectedItem(), this.vista.insertEdad.getSelectedItem());
 
-            boolean comprobar;
-            //Llama al método crear vino, enviando como parámetros lo que se llene en los JTextField, crea el vino y retorna un booleano
-            comprobar = crearVino(this.vista.insertId.getText(), this.vista.insertMarca.getText(), this.vista.insertColor.getSelectedItem(), this.vista.insertEdad.getSelectedItem() );
-
-            //Envía el booleano comprobar, para enviar el mensaje de si se pudo añadir o no
-            this.vista.msgdevino(comprobar);
+                //Envía el booleano comprobar, para enviar el mensaje de si se pudo añadir o no
+                this.vista.msgdevino(comprobar);
+            }
         }
+        
         if (e.getSource() == this.vista.btnLimpiar) {
             this.vista.blanquearCampos();
         }
+
         if (e.getSource() == this.vista.btnBuscar) {
-            buscarVino("");
-            
+            String id = this.vista.consId.getText();
+            buscarVino(id);
+            if (!lista.isEmpty() && lista.get(posicion).getId().equals(id)) {
+                this.vista.consMarca.setText(lista.get(posicion).getMarca());
+                this.vista.consColor.setText((String) lista.get(posicion).getColor());
+                this.vista.consEdad.setText((String) lista.get(posicion).getEdad());
+            } else if (lista.isEmpty()) {
+                this.vista.msgVacio(id);
+            } else {
+                this.vista.msgInexistente(id);
+            }
         }
-        
+
         if (e.getSource() == this.vista.btnSalir) {
             this.vista.setVisible(false);
             this.vista.dispose();
@@ -90,7 +104,7 @@ public class Controlador implements ActionListener {
     //Busca cliente
     public void buscarVino(String id) {
         String idaux = "";
-        posicion = -1; //Cada que vuelva a iniciar se reinicia ese valor para no volver a mostrar
+        posicion = 0; //Cada que vuelva a iniciar se reinicia ese valor para no volver a mostrar
         for (int i = 0; i < lista.size(); i++) { //Recorre los elementos de la lista
             idaux = lista.get(i).getId();
             if (idaux.equals(id)) { //Compara si en algún elemento de la lista ya está ingresado algún ID del mismo tipo
@@ -98,5 +112,4 @@ public class Controlador implements ActionListener {
             }
         }
     }
-
 }

@@ -42,12 +42,23 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     public void msgdevino(boolean ingresado) { //Mensaje que muestra si el vino ha sido ingresado o no
-
         if (ingresado == true) {
             JOptionPane.showMessageDialog(null, "Vino insertado");
         } else {
             JOptionPane.showMessageDialog(null, "Vino ya existe");
         } 
+    }
+    
+    public void msgInsertar(String mensaje) {
+        JOptionPane.showMessageDialog(null, "No hay datos para insertar");
+    }
+    
+    public void msgVacio(String mensaje) {
+        JOptionPane.showMessageDialog(null, "No hay vinos");
+    }
+    
+    public void msgInexistente(String mensaje) {
+        JOptionPane.showMessageDialog(null, "Vino no se ha insertado aun");
     }
 
     /**
