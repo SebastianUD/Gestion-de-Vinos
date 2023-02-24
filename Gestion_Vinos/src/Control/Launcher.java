@@ -14,7 +14,6 @@ public class Launcher {
         Interfaz vista = new Interfaz();
         Controlador control = new Controlador(modelo, vista);
         control.iniciar();
-        vista.setVisible(true);
 
     }
 }
