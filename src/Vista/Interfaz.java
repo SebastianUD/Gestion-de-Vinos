@@ -59,6 +59,13 @@ public class Interfaz extends javax.swing.JFrame {
         consEdad.setText("");
         JOptionPane.showMessageDialog(null, "Vino no se ha insertado aun");
     }
+    
+    public void msgIngresar(String id) {
+        consMarca.setText("");
+        consColor.setText("");
+        consEdad.setText("");
+        JOptionPane.showMessageDialog(null, "Escriba el ID para poder buscar el vino");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
