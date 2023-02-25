@@ -65,14 +65,15 @@ public class Controlador implements ActionListener {
             } else if (lista.isEmpty()) {
                 // Muestra un mensaje en la interfaz gráfica si la lista está vacía
                 this.vista.msgVacio(id);
+            } else if (vista.consId.getText().isEmpty()) { //Si le da en buscar y no ha ingresado vinos
+                this.vista.msgIngresar(id);
             } else {
                 // Muestra un mensaje en la interfaz gráfica si el vino no se encuentra en la lista
                 this.vista.msgInexistente(id);
             }
         }
 
-        if (e.getSource() == this.vista.btnSalir) {
-            this.vista.setVisible(false);
+        if (e.getSource() == this.vista.btnSalir) {//Cerrar la ventana
             this.vista.dispose();
         }
     }
